@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Candlelit Question ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #2b0a14, #0b0205);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.chat {
+    width: 95%;
+    max-width: 380px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 0 40px rgba(255,150,150,0.2);
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.bubble {
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 15px;
+    width: fit-content;
+    max-width: 80%;
+    animation: fadeUp 0.5s ease;
+}
+
+.him {
+    background: #3a1c28;
+    align-self: flex-start;
+}
+
+.her {
+    background: #8b2c3e;
+    margin-left: auto;
+}
+
+.option {
+    background: #fff;
+    color: #8b2c3e;
+    padding: 8px 12px;
+    border-radius: 20px;
+    margin: 6px 0;
+    cursor: pointer;
+    text-align: center;
+}
+
+.option:hover {
+    background: #ffd6dc;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.candle {
+    font-size: 2em;
+    text-align: center;
+    animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.85; }
+}
+
+.hidden { display: none; }
+
+img {
+    width: 180px;
+    display: block;
+    margin: 15px auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat" id="chat">
+
+    <div class="candle">🕯️ 🕯️ 🕯️</div>
+
+    <div class="bubble him">
+        In every world… there are people connected by fate.
+    </div>
+
+    <div class="bubble him">
+        So I have a question for you.
+    </div>
+
+    <div class="bubble him">
+        Do you have anything in common with Francis?
+    </div>
+
+    <div class="option" onclick="yesCommon()">Yes</div>
+    <div class="option" onclick="noCommon()">No</div>
+
+</div>
+
+<script>
+const chat = document.getElementById("chat");
+
+function addBubble(text, cls) {
+    const div = document.createElement("div");
+    div.className = "bubble " + cls;
+    div.innerHTML = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function addOption(text, fn) {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.innerText = text;
+    div.onclick = fn;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function clearOptions() {
+    document.querySelectorAll(".option").forEach(o => o.remove());
+}
+
+function yesCommon() {
+    clearOptions();
+    addBubble("Then tell me… what is it?", "him");
+
+    ["Cool composure","Ambiversy","Autonomous","Controversial","Simple"].forEach(item => {
+        addOption(item, showBouquet);
+    });
+}
+
+function noCommon() {
+    clearOptions();
+    addBubble("🚪", "him");
+    addBubble(
+        "I’m sorry… but you can’t open this door and leave my heart.<br>Maybe we could try being best friends?",
+        "him"
+    );
+    addOption("Okay", showBouquet);
+}
+
+function showBouquet() {
+    clearOptions();
+    addBubble("💐", "him");
+    addBubble("Like Tang San waiting through lifetimes…", "him");
+
+    const img = document.createElement("img");
+    img.src = "https://i.imgur.com/Z6aZK6F.png";
+    chat.appendChild(img);
+
+    addBubble("Will you be my Valentine, Monicah? ❤️", "him");
+
+    addOption("Yes 💖", yesAnswer);
+    addOption("No 🙈", noAnswer);
+}
+
+function yesAnswer() {
+    clearOptions();
+    addBubble("💖 Then my heart has found its Xiao Wu.", "him");
+    addBubble("No matter the world… I choose you.", "him");
+}
+
+function noAnswer() {
+    clearOptions();
+    addBubble("Even so… my heart remains.", "him");
+    addBubble("Some bonds don’t fade.", "him");
+}
+</script>
+
+</body>
+</html>
